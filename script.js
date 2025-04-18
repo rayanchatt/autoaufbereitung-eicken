@@ -1,10 +1,12 @@
-// Vorher/Nachher Slider
-document.querySelectorAll('.slider').forEach(slider => {
-  const range = slider.querySelector('.slider-input');
-  const overlay = slider.querySelector('.overlay');
-  range.addEventListener('input', () => {
-    overlay.style.width = `${range.value}%`;
-  });
+// Nachher-Button
+const toggleButton = document.getElementById('toggleButton');
+const wrapper = document.querySelector('.vergleich-wrapper');
+let isNachher = false;
+
+toggleButton.addEventListener('click', () => {
+  isNachher = !isNachher;
+  wrapper.classList.toggle('show-nachher', isNachher);
+  toggleButton.textContent = isNachher ? 'Vorher anzeigen' : 'Nachher anzeigen';
 });
 
 // Scroll-Animation
