@@ -39,11 +39,8 @@ window.addEventListener("load", () => {
 const preiseButton = document.getElementById('preiseButton');
 const preiseWrapper = document.getElementById('preiseBildWrapper');
 
-preiseWrapper.style.display = "none"; // anfangs ausgeblendet
-
 preiseButton.addEventListener('click', () => {
   const isOpen = preiseWrapper.classList.toggle('open');
-  preiseWrapper.style.display = isOpen ? "block" : "none";
   preiseButton.textContent = isOpen
     ? 'Vollständige Preisliste ausblenden ▲'
     : 'Vollständige Preisliste anzeigen ▼';
