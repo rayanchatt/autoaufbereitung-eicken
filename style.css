@@ -6,48 +6,46 @@
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
   background: #222;
   color: #fff;
+  padding: 1rem 2rem;
 }
+
+.header-inner {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.insta-icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+nav {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 nav a {
   color: #fff;
   margin-left: 1rem;
   text-decoration: none;
-}
-nav a:hover {
-  text-decoration: underline;
-}
-.insta-icon {
-  margin-right: 1rem;
-}
-.insta-icon img {
-  vertical-align: middle;
+  font-size: 0.95rem;
 }
 
-#hero {
-  text-align: center;
-  padding: 4rem 1rem;
-  background: #f4f4f4;
-}
-#hero h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.6rem;
-}
-#hero button {
-  font-size: 1rem;
-  padding: 0.7rem 1.6rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  background: #222;
-  color: #fff;
-}
-#hero button:hover {
-  opacity: 0.9;
+nav a:hover {
+  text-decoration: underline;
 }
 
 section {
