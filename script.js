@@ -21,3 +21,15 @@ const observer = new IntersectionObserver(entries => {
   threshold: 0.1
 });
 fadeInElements.forEach(el => observer.observe(el));
+
+// Preloader ausblenden, sobald alles geladen ist
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    preloader.classList.add("fade-out");
+    setTimeout(() => {
+      preloader.remove();
+    }, 500); // nach der Transition
+  }
+});
+
