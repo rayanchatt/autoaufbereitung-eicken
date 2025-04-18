@@ -1,4 +1,4 @@
-// Nachher-Button
+// Nachher-Button Logik
 const toggleButton = document.getElementById('toggleButton');
 const wrapper = document.querySelector('.vergleich-wrapper');
 let isNachher = false;
@@ -9,7 +9,7 @@ toggleButton.addEventListener('click', () => {
   toggleButton.textContent = isNachher ? 'Vorher anzeigen' : 'Nachher anzeigen';
 });
 
-// Scroll-Animation
+// Scroll-Fade-In Animation
 const fadeInElements = document.querySelectorAll('.fade-in');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
