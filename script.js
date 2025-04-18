@@ -1,4 +1,4 @@
-// Nachher-Button Logik
+// Bildvergleich: Nachher-Bild ein-/ausblenden
 const toggleButton = document.getElementById('toggleButton');
 const wrapper = document.querySelector('.vergleich-wrapper');
 let isNachher = false;
@@ -6,7 +6,9 @@ let isNachher = false;
 toggleButton.addEventListener('click', () => {
   isNachher = !isNachher;
   wrapper.classList.toggle('show-nachher', isNachher);
-  toggleButton.textContent = isNachher ? 'Vorher anzeigen' : 'Nachher anzeigen';
+  toggleButton.textContent = isNachher
+    ? 'Vorher anzeigen'
+    : 'Nachher anzeigen';
 });
 
 // Scroll-Fade-In
@@ -22,7 +24,7 @@ const observer = new IntersectionObserver(entries => {
 });
 fadeInElements.forEach(el => observer.observe(el));
 
-// Preloader ausblenden
+// Preloader entfernen nach Laden
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
   if (preloader) {
@@ -33,13 +35,15 @@ window.addEventListener("load", () => {
   }
 });
 
-// Dropdown Preisliste (Bild)
+// Dropdown: vollständige Preisliste ein-/ausklappen
 const preiseButton = document.getElementById('preiseButton');
 const preiseWrapper = document.getElementById('preiseBildWrapper');
 
+preiseWrapper.style.display = "none"; // anfangs ausgeblendet
+
 preiseButton.addEventListener('click', () => {
-  preiseWrapper.classList.toggle('open');
-  const isOpen = preiseWrapper.classList.contains('open');
+  const isOpen = preiseWrapper.classList.toggle('open');
+  preiseWrapper.style.display = isOpen ? "block" : "none";
   preiseButton.textContent = isOpen
     ? 'Vollständige Preisliste ausblenden ▲'
     : 'Vollständige Preisliste anzeigen ▼';
