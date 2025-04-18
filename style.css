@@ -256,12 +256,11 @@ footer {
 #preiseBildWrapper {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.6s ease;
-  display: none;
+  transition: max-height 0.6s ease, margin-top 0.3s ease;
+  margin-top: 0;
 }
 #preiseBildWrapper.open {
   max-height: 1000px;
-  display: block;
   margin-top: 1rem;
 }
 #preiseBildWrapper img {
