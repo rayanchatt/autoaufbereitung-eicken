@@ -118,7 +118,7 @@ header {
   opacity: 0.9;
 }
 
-/* Section Layout */
+/* Sections */
 section {
   padding: 2.5rem 1rem;
   max-width: 900px;
@@ -127,6 +127,8 @@ section {
 h2 {
   margin-bottom: 1rem;
 }
+
+/* Tabelle */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -179,7 +181,7 @@ footer {
   font-size: 0.85rem;
 }
 
-/* Fade-In beim Scrollen */
+/* Scroll-Fade-In */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -190,7 +192,7 @@ footer {
   transform: translateY(0);
 }
 
-/* Vorher/Nachher Bereich */
+/* Vorher/Nachher */
 .bildvergleich {
   text-align: center;
 }
@@ -234,7 +236,8 @@ footer {
 #toggleButton:hover {
   opacity: 0.9;
 }
-/* Dropdown-Bild unter Preisliste */
+
+/* Preisliste-Dropdown */
 .preise-toggle {
   text-align: center;
   margin-top: 1rem;
@@ -254,6 +257,12 @@ footer {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.6s ease;
+  display: none;
+}
+#preiseBildWrapper.open {
+  max-height: 1000px;
+  display: block;
+  margin-top: 1rem;
 }
 #preiseBildWrapper img {
   width: 100%;
@@ -261,8 +270,5 @@ footer {
   margin: 0 auto;
   display: block;
   border-radius: 10px;
-}
-#preiseBildWrapper.open {
-  max-height: 1000px;
-  margin-top: 1rem;
+  transition: transform 0.3s ease;
 }
