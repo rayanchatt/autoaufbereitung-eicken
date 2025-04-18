@@ -7,17 +7,50 @@
   padding: 0;
 }
 
+/* Preloader mit Auto */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+.car-animation {
+  width: 64px;
+  height: auto;
+  animation: drive 2.5s ease-in-out infinite;
+  margin-left: -80px;
+}
+@keyframes drive {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(50vw);
+  }
+  100% {
+    transform: translateX(110vw);
+  }
+}
+#preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Header */
 header {
   background: #222;
   color: #fff;
   padding: 1rem;
 }
-
 .header-inner {
   max-width: 1100px;
   margin: 0 auto;
 }
-
 .header-top {
   display: flex;
   align-items: center;
@@ -25,20 +58,17 @@ header {
   position: relative;
   margin-bottom: 0.5rem;
 }
-
 .header-top h1 {
   font-size: 1.6rem;
   margin: 0;
   text-align: center;
 }
-
 .insta-icon {
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
 }
-
 .insta-icon img {
   height: 24px;
   width: 24px;
@@ -49,7 +79,6 @@ header {
 .insta-icon img:hover {
   transform: scale(1.1);
 }
-
 .nav-links {
   display: flex;
   justify-content: center;
@@ -57,17 +86,39 @@ header {
   flex-wrap: wrap;
   margin-top: 0.5rem;
 }
-
 .nav-links a {
   color: #fff;
   text-decoration: none;
   font-size: 0.95rem;
 }
-
 .nav-links a:hover {
   text-decoration: underline;
 }
 
+/* Hero */
+#hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: #f4f4f4;
+}
+#hero h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+#hero button {
+  font-size: 1rem;
+  padding: 0.7rem 1.6rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+}
+#hero button:hover {
+  opacity: 0.9;
+}
+
+/* Section Layout */
 section {
   padding: 2.5rem 1rem;
   max-width: 900px;
@@ -80,13 +131,24 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 0.5rem;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
 }
-th, td {
-  border: 1px solid #ccc;
-  padding: 0.6rem;
+th {
+  background: #222;
+  color: #fff;
   text-align: left;
 }
+th, td {
+  padding: 0.7rem;
+  border-bottom: 1px solid #ccc;
+}
+tr:last-child td {
+  border-bottom: none;
+}
 
+/* Formular */
 .kontakt-formular {
   max-width: 500px;
   margin: 0 auto;
@@ -109,6 +171,7 @@ th, td {
   cursor: pointer;
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 1rem 0;
@@ -116,7 +179,7 @@ footer {
   font-size: 0.85rem;
 }
 
-/* Animation bei Scroll */
+/* Fade-In beim Scrollen */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -127,7 +190,7 @@ footer {
   transform: translateY(0);
 }
 
-/* Vorher/Nachher-Bereich */
+/* Vorher/Nachher Bereich */
 .bildvergleich {
   text-align: center;
 }
@@ -170,36 +233,4 @@ footer {
 }
 #toggleButton:hover {
   opacity: 0.9;
-}
-
-/* Preloader */
-#preloader {
-  position: fixed;
-  inset: 0;
-  background: #222;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #fff;
-  border-top: 4px solid #888;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-#preloader.fade-out {
-  opacity: 0;
-  visibility: hidden;
 }
