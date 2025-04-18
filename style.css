@@ -69,43 +69,6 @@ th, td {
   text-align: left;
 }
 
-.slider-container {
-  position: relative;
-  max-width: 700px;
-  margin: 2rem auto;
-}
-.slider {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-.slider img {
-  width: 100%;
-  display: block;
-}
-.slider .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 50%;
-  overflow: hidden;
-}
-.slider .overlay img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-.slider-input {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  z-index: 10;
-}
-
 .kontakt-formular {
   max-width: 500px;
   margin: 0 auto;
@@ -135,7 +98,7 @@ footer {
   font-size: 0.85rem;
 }
 
-/* Animation bei Scroll */
+/* Scroll-Fade-In */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -145,26 +108,40 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Vorher/Nachher-Bereich */
 .bildvergleich {
   text-align: center;
 }
+
 .vergleich-wrapper {
   position: relative;
+  width: 100%;
   max-width: 700px;
   margin: 1rem auto 2rem;
+  overflow: hidden;
+  border-radius: 10px;
 }
+
 .bild {
   width: 100%;
+  height: auto;
   display: block;
-  border-radius: 6px;
+  border-radius: 10px;
 }
+
 .nachher {
   position: absolute;
   top: 0;
   left: 0;
-  transition: opacity 0.8s ease-in-out;
+  width: 100%;
+  height: auto;
   opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  pointer-events: none;
+  z-index: 2;
 }
+
 .vergleich-wrapper.show-nachher .nachher {
   opacity: 1;
 }
