@@ -67,15 +67,42 @@
 
   <section id="termin" class="fade-in">
     <h2>Termin buchen</h2>
+  
     <form action="https://formspree.io/f/mzzelwpo" method="POST" class="kontakt-formular">
-      <label>Name <input type="text" name="name" required></label>
-      <label>E-Mail <input type="email" name="email" required></label>
-      <label>Wunschdatum <input type="date" name="date" required></label>
-      <label>Nachricht <textarea name="message" rows="4"></textarea></label>
+      <label>Name
+        <input type="text" name="name" required>
+      </label>
+  
+      <label>E-Mail
+        <input type="email" name="email" required>
+      </label>
+  
+      <label>Wunschdatum
+        <input type="date" name="date" required>
+      </label>
+  
+      <label>Nachricht
+        <textarea name="message" rows="4"></textarea>
+      </label>
+  
+      <!-- Honeypot (zusätzlicher Spamschutz) -->
+      <div style="display:none;">
+        <input type="text" name="_gotcha">
+      </div>
+  
+      <!-- reCAPTCHA v2 -->
+      <div class="g-recaptcha" data-sitekey="6LerOR0rAAAAALOv6VAmkgvnPvQJb7rvKFcCrhjv"></div>
+  
+      <!-- Weiterleitung nach erfolgreichem Senden -->
+      <input type="hidden" name="_next" value="danke.html">
+  
       <button type="submit">Absenden</button>
     </form>
+  
+    <!-- reCAPTCHA-Script einbinden -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </section>
-
+  
   <footer>
     <small>© 2025 Autoaufbereitung‑Eicken · Mönchengladbach</small>
   </footer>
