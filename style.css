@@ -10,72 +10,62 @@
 header {
   background: #222;
   color: #fff;
-  padding: 1rem 1.5rem;
+  padding: 1rem;
 }
 
-.header-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.header-inner {
   max-width: 1100px;
   margin: 0 auto;
-  flex-wrap: wrap;
-  position: relative;
 }
 
-header h1 {
-  flex: 1 1 100%;
-  text-align: center;
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.header-top h1 {
   font-size: 1.6rem;
-  margin: 0.5rem 0;
+  margin: 0;
+  text-align: center;
+}
+
+.insta-icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .insta-icon img {
   height: 24px;
+  width: 24px;
+  object-fit: contain;
   display: block;
+  transition: transform 0.2s ease;
 }
-.insta-icon {
-  position: absolute;
-  left: 1.5rem;
-  top: 1.5rem;
+.insta-icon img:hover {
+  transform: scale(1.1);
 }
 
-nav.desktop-nav {
+.nav-links {
   display: flex;
+  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
-  justify-content: center;
   margin-top: 0.5rem;
 }
-nav.desktop-nav a {
+
+.nav-links a {
   color: #fff;
   text-decoration: none;
   font-size: 0.95rem;
 }
-nav.desktop-nav a:hover {
-  text-decoration: underline;
-}
 
-#hero {
-  text-align: center;
-  padding: 4rem 1rem;
-  background: #f4f4f4;
-}
-#hero h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.6rem;
-}
-#hero button {
-  font-size: 1rem;
-  padding: 0.7rem 1.6rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  background: #222;
-  color: #fff;
-}
-#hero button:hover {
-  opacity: 0.9;
+.nav-links a:hover {
+  text-decoration: underline;
 }
 
 section {
