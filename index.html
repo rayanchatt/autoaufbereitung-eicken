@@ -3,24 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Autoaufbereitung‑Eicken · Mönchengladbach</title>
-  <!-- canonical‑URL für SEO -->
-  <link rel="canonical" href="https://<dein‑GitHub‑Name>.github.io/autoaufbereitung-eicken/">
+  <title>Autoaufbereitung-Eicken · Mönchengladbach</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
+    <a href="https://instagram.com/autoaufbereitung.eicken" target="_blank" class="insta-icon">
+      <img src="images/instagram.png" alt="Instagram" height="28">
+    </a>
     <h1>Autoaufbereitung‑Eicken</h1>
     <nav>
       <a href="#preise">Preise</a>
       <a href="#termin">Termin buchen</a>
-      <a href="https://instagram.com/autoaufbereitung.eicken" target="_blank" rel="noopener">Instagram</a>
-      <a href="impressum.html">Impressum & Datenschutz</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="impressum.html">Impressum</a>
     </nav>
   </header>
 
   <section id="hero">
-    <h2>Professionelle Fahrzeugaufbereitung im Herzen von Eicken</h2>
+    <h2>Professionelle Fahrzeugaufbereitung in Mönchengladbach-Eicken</h2>
     <button onclick="window.location='#termin'">Jetzt Termin anfragen</button>
   </section>
 
@@ -29,23 +30,27 @@
     <table>
       <tr><th>Leistung</th><th>ab Preis (€)</th></tr>
       <tr><td>Innen‑ & Außenreinigung</td><td>79</td></tr>
-      <tr><td>Lackpolitur + Versiegelung</td><td>149</td></tr>
+      <tr><td>Politur + Versiegelung</td><td>149</td></tr>
       <tr><td>Keramikbeschichtung</td><td>399</td></tr>
-      <tr><td>Tierhaar‑Entfernung</td><td>Auf Anfrage</td></tr>
+      <tr><td>Tierhaar-Entfernung</td><td>Auf Anfrage</td></tr>
     </table>
   </section>
 
-  <section id="instagram">
-    <h2>Einblicke in unsere Arbeit</h2>
-    <!-- Beispiel‑Embed: ersetze XXXXXXXXX durch die Post‑ID -->
-    <blockquote class="instagram-media" 
-      data-instgrm-permalink="https://www.instagram.com/p/XXXXXXXXX/" 
-      data-instgrm-version="14"></blockquote>
+  <section id="vergleich">
+    <h2>Vorher / Nachher</h2>
+    <div class="slider-container">
+      <div class="slider">
+        <img src="images/vorher.png" alt="Vorher">
+        <div class="overlay">
+          <img src="images/nachher.png" alt="Nachher">
+        </div>
+        <input type="range" min="0" max="100" value="50" class="slider-input">
+      </div>
+    </div>
   </section>
 
   <section id="termin">
     <h2>Termin buchen</h2>
-    <!-- simplestes Gratis‑Formular via Formspree – FormID ersetzen -->
     <form action="https://formspree.io/f/DEINE_FORM_ID" method="POST">
       <label>Name <input type="text" name="name" required></label>
       <label>E‑Mail <input type="email" name="email" required></label>
@@ -53,14 +58,12 @@
       <label>Nachricht <textarea name="message" rows="4"></textarea></label>
       <button type="submit">Absenden</button>
     </form>
-    <!-- Alternative: Calendly‑Widget statt Formular -->
   </section>
 
   <footer>
     <small>© 2025 Autoaufbereitung‑Eicken · Mönchengladbach</small>
   </footer>
 
-  <script async src="//www.instagram.com/embed.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
