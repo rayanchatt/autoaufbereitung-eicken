@@ -1,43 +1,72 @@
-:root { font-family: system-ui, sans-serif; }
-* { box-sizing: border-box; }
+:root {
+  font-family: system-ui, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
 
 header {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 2rem; background:#222; color:#fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #222;
+  color: #fff;
 }
-nav a { color:#fff; margin-left:1rem; text-decoration:none; font-size:.95rem; }
-nav a:hover { text-decoration:underline; }
-
-#hero { text-align:center; padding:4rem 1rem; background:#f4f4f4; }
-#hero h2 { margin-bottom:1.5rem; font-size:1.6rem; }
-#hero button {
-  font-size:1rem; padding:.7rem 1.6rem; cursor:pointer; border:none;
-  border-radius:6px; background:#222; color:#fff;
+nav a {
+  color: #fff;
+  margin-left: 1rem;
+  text-decoration: none;
 }
-#hero button:hover { opacity:.9; }
-
-section { padding:2.5rem 1rem; max-width:900px; margin:0 auto; }
-h2 { margin-bottom:1rem; }
-
-table { width:100%; border-collapse:collapse; margin-top:.5rem; }
-th,td { border:1px solid #ccc; padding:.6rem; text-align:left; }
-
-form { display:grid; gap:1rem; max-width:450px; }
-input,textarea {
-  width:100%; padding:.5rem; border:1px solid #ccc; border-radius:4px;
+nav a:hover {
+  text-decoration: underline;
 }
-button[type="submit"] {
-  background:#222; color:#fff; border:none; padding:.6rem 1.4rem;
-  border-radius:6px; cursor:pointer;
-}
-
-footer { text-align:center; padding:1rem 0; background:#fafafa; font-size:.85rem; }
-
 .insta-icon {
   margin-right: 1rem;
 }
 .insta-icon img {
   vertical-align: middle;
+}
+
+#hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: #f4f4f4;
+}
+#hero h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+#hero button {
+  font-size: 1rem;
+  padding: 0.7rem 1.6rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+}
+#hero button:hover {
+  opacity: 0.9;
+}
+
+section {
+  padding: 2.5rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+h2 {
+  margin-bottom: 1rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.6rem;
+  text-align: left;
 }
 
 .slider-container {
@@ -56,14 +85,16 @@ footer { text-align:center; padding:1rem 0; background:#fafafa; font-size:.85rem
 }
 .slider .overlay {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 50%;
   overflow: hidden;
 }
 .slider .overlay img {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
 }
 .slider-input {
@@ -75,3 +106,42 @@ footer { text-align:center; padding:1rem 0; background:#fafafa; font-size:.85rem
   z-index: 10;
 }
 
+.kontakt-formular {
+  max-width: 500px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+}
+.kontakt-formular input,
+.kontakt-formular textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.kontakt-formular button {
+  background: #222;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background: #fafafa;
+  font-size: 0.85rem;
+}
+
+/* Animation bei Scroll */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
