@@ -9,7 +9,7 @@ toggleButton.addEventListener('click', () => {
   toggleButton.textContent = isNachher ? 'Vorher anzeigen' : 'Nachher anzeigen';
 });
 
-// Scroll-Fade-In Animation
+// Scroll-Fade-In
 const fadeInElements = document.querySelectorAll('.fade-in');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -22,14 +22,13 @@ const observer = new IntersectionObserver(entries => {
 });
 fadeInElements.forEach(el => observer.observe(el));
 
-// Preloader ausblenden, sobald alles geladen ist
+// Preloader ausblenden
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
   if (preloader) {
     preloader.classList.add("fade-out");
     setTimeout(() => {
       preloader.remove();
-    }, 500); // nach der Transition
+    }, 500);
   }
 });
-
