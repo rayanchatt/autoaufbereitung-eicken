@@ -234,3 +234,35 @@ footer {
 #toggleButton:hover {
   opacity: 0.9;
 }
+/* Dropdown-Bild unter Preisliste */
+.preise-toggle {
+  text-align: center;
+  margin-top: 1rem;
+}
+#preiseButton {
+  background: none;
+  border: none;
+  color: #222;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+#preiseButton:hover {
+  text-decoration: underline;
+}
+#preiseBildWrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+}
+#preiseBildWrapper img {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px;
+}
+#preiseBildWrapper.open {
+  max-height: 1000px;
+  margin-top: 1rem;
+}
