@@ -32,3 +32,15 @@ window.addEventListener("load", () => {
     }, 500);
   }
 });
+
+// Dropdown Preisliste (Bild)
+const preiseButton = document.getElementById('preiseButton');
+const preiseWrapper = document.getElementById('preiseBildWrapper');
+
+preiseButton.addEventListener('click', () => {
+  preiseWrapper.classList.toggle('open');
+  const isOpen = preiseWrapper.classList.contains('open');
+  preiseButton.textContent = isOpen
+    ? 'Vollständige Preisliste ausblenden ▲'
+    : 'Vollständige Preisliste anzeigen ▼';
+});
