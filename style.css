@@ -32,3 +32,46 @@ button[type="submit"] {
 }
 
 footer { text-align:center; padding:1rem 0; background:#fafafa; font-size:.85rem; }
+
+.insta-icon {
+  margin-right: 1rem;
+}
+.insta-icon img {
+  vertical-align: middle;
+}
+
+.slider-container {
+  position: relative;
+  max-width: 700px;
+  margin: 2rem auto;
+}
+.slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.slider img {
+  width: 100%;
+  display: block;
+}
+.slider .overlay {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+}
+.slider .overlay img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+}
+.slider-input {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  z-index: 10;
+}
+
