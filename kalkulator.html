@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fahrzeugpflege-Kalkulator</title>
-  <script src="calculator.js"></script> <!-- Emscripten-WASM-Script -->
+  <script src="calculator.js"></script>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -12,24 +12,37 @@
       max-width: 600px;
       margin: auto;
     }
-    label {
-      display: block;
-      margin-top: 1rem;
+    .frage {
+      margin-bottom: 1.5rem;
     }
-    .checkboxes label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.95rem;
+    .frage label {
+      font-weight: 500;
+    }
+    .antworten button {
+      margin: 0.3rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #222;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .antworten button.active {
+      background: #0077ff;
     }
     #result {
-      margin-top: 2rem;
       font-weight: bold;
+      margin-top: 2rem;
     }
     #submitBtn {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.2rem;
       font-size: 1rem;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
       display: none;
     }
   </style>
@@ -38,62 +51,112 @@
   <h1>Fahrzeugpflege-Kalkulator</h1>
 
   <form id="pflegeForm">
-    <div class="checkboxes">
-      <label><input type="checkbox" name="suv"> SUV-Aufschlag</label>
-      <label><input type="checkbox" name="handwash"> Handwäsche</label>
-      <label><input type="checkbox" name="interior"> Innenreinigung</label>
-      <label><input type="checkbox" name="leather"> Lederpflege</label>
-      <label><input type="checkbox" name="alcantara"> Alcantara-Reinigung</label>
-      <label><input type="checkbox" name="tireshine"> Reifenglanz</label>
-      <label><input type="checkbox" name="glassseal"> Scheibenversiegelung</label>
-      <label><input type="checkbox" name="polish"> Hochglanzpolitur*</label>
-      <label><input type="checkbox" name="polish2"> Zweistufige Lackaufbereitung*</label>
-      <label><input type="checkbox" name="polish3"> Dreistufige Lackaufbereitung*</label>
-      <label><input type="checkbox" name="ceramic"> Keramik-Lackversiegelung</label>
+    <div class="frage">
+      <label>Fahrzeugtyp:</label>
+      <div class="antworten">
+        <button type="button" data-name="suv" data-value="true">SUV</button>
+        <button type="button" data-name="suv" data-value="false">Kein SUV</button>
+      </div>
     </div>
+    <div class="frage">
+      <label>Möchten Sie eine Handwäsche?</label>
+      <div class="antworten">
+        <button type="button" data-name="handwash" data-value="true">Ja</button>
+        <button type="button" data-name="handwash" data-value="false">Nein</button>
+      </div>
+    </div>
+    <div class="frage">
+      <label>Innenraumreinigung gewünscht?</label>
+      <div class="antworten">
+        <button type="button" data-name="interior" data-value="true">Ja</button>
+        <button type="button" data-name="interior" data-value="false">Nein</button>
+      </div>
+    </div>
+    <div class="frage">
+      <label>Extras dazubuchen?</label>
+      <div class="antworten">
+        <button type="button" data-name="leather" data-value="true">Lederpflege</button>
+        <button type="button" data-name="alcantara" data-value="true">Alcantara-Reinigung</button>
+        <button type="button" data-name="tireshine" data-value="true">Reifenglanz</button>
+        <button type="button" data-name="glassseal" data-value="true">Scheibenversiegelung</button>
+        <button type="button" data-name="polish" data-value="true">Hochglanzpolitur*</button>
+        <button type="button" data-name="polish2" data-value="true">2-stufige Lackaufbereitung*</button>
+        <button type="button" data-name="polish3" data-value="true">3-stufige Lackaufbereitung*</button>
+        <button type="button" data-name="ceramic" data-value="true">Keramikversiegelung</button>
+      </div>
+    </div>
+
     <div id="result">Gesamtpreis: –</div>
     <button type="submit" id="submitBtn">Anfrage senden</button>
   </form>
 
   <script>
-    Module.onRuntimeInitialized = () => {
-      const form = document.getElementById('pflegeForm');
-      const resultDiv = document.getElementById('result');
-      const submitBtn = document.getElementById('submitBtn');
+    const form = document.getElementById('pflegeForm');
+    const resultDiv = document.getElementById('result');
+    const submitBtn = document.getElementById('submitBtn');
+    const state = {
+      suv: false,
+      handwash: false,
+      interior: false,
+      leather: false,
+      alcantara: false,
+      tireshine: false,
+      glassseal: false,
+      polish: false,
+      polish2: false,
+      polish3: false,
+      ceramic: false,
+    };
 
-      function getChecked(name) {
-        return form.elements[name].checked;
+    function updatePreis() {
+      const preis = Module.calculatePrice(
+        state.suv,
+        state.handwash,
+        state.interior,
+        state.leather,
+        state.alcantara,
+        state.tireshine,
+        state.glassseal,
+        state.polish,
+        state.polish2,
+        state.polish3,
+        state.ceramic
+      );
+
+      if (preis === -1.0) {
+        resultDiv.textContent = "Bitte Handwäsche aktivieren, um diese Leistung zu buchen.";
+        submitBtn.style.display = 'none';
+      } else {
+        resultDiv.textContent = `Gesamtpreis: ${preis.toFixed(2)} €`;
+        submitBtn.style.display = 'inline-block';
       }
+    }
 
-      form.addEventListener('change', () => {
-        const preis = Module.calculatePrice(
-          getChecked('suv'),
-          getChecked('handwash'),
-          getChecked('interior'),
-          getChecked('leather'),
-          getChecked('alcantara'),
-          getChecked('tireshine'),
-          getChecked('glassseal'),
-          getChecked('polish'),
-          getChecked('polish2'),
-          getChecked('polish3'),
-          getChecked('ceramic')
-        );
-
-        if (preis === -1.0) {
-          resultDiv.textContent = "Bitte Handwäsche aktivieren, um diese Leistung zu buchen.";
-          submitBtn.style.display = 'none';
-        } else {
-          resultDiv.textContent = `Gesamtpreis: ${preis.toFixed(2)} €`;
-          submitBtn.style.display = 'inline-block';
-        }
-      });
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert("Deine Anfrage wurde gespeichert. Wir melden uns bei dir!");
+    Module.onRuntimeInitialized = () => {
+      const buttons = document.querySelectorAll('button[data-name]');
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          const name = button.dataset.name;
+          const value = button.dataset.value === 'true';
+          if (name === 'suv' || name === 'handwash' || name === 'interior') {
+            // toggle zwischen Ja/Nein
+            document.querySelectorAll(`[data-name="${name}"]`).forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+            state[name] = value;
+          } else {
+            // toggle Extras
+            button.classList.toggle('active');
+            state[name] = !state[name];
+          }
+          updatePreis();
+        });
       });
     };
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      alert("Deine Anfrage wurde gespeichert. Wir melden uns bei dir!");
+    });
   </script>
 </body>
 </html>
