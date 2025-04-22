@@ -122,92 +122,98 @@
   </form>
 
   <script>
-    const state = {
-      suv: false,
-      handwash: false,
-      interior: false,
-      leather: false,
-      alcantara: false,
-      tireshine: false,
-      glassseal: false,
-      polish: false,
-      polish2: false,
-      polish3: false,
-      ceramic: false,
-    };
-
-    let current = 0;
-    const fragenWrapper = document.getElementById('fragenWrapper');
-    const frageDivs = document.querySelectorAll('.frage');
-    const progress = document.getElementById('progress');
-
-    function updateProgress() {
-      const percent = ((current + 1) / frageDivs.length) * 100;
-      progress.style.width = `${percent}%`;
-    }
-
-    function nextFrage() {
-      current++;
-      if (current < frageDivs.length) {
-        fragenWrapper.style.transform = `translateX(-${current * 100}%)`;
+    let Module; // Global verfügbar machen
+    createModule().then((instance) => {
+      Module = instance;
+      startApp();
+    });
+  
+    function startApp() {
+      const state = {
+        suv: false,
+        handwash: false,
+        interior: false,
+        leather: false,
+        alcantara: false,
+        tireshine: false,
+        glassseal: false,
+        polish: false,
+        polish2: false,
+        polish3: false,
+        ceramic: false,
+      };
+  
+      let current = 0;
+      const fragenWrapper = document.getElementById('fragenWrapper');
+      const frageDivs = document.querySelectorAll('.frage');
+      const progress = document.getElementById('progress');
+  
+      function updateProgress() {
+        const percent = ((current + 1) / frageDivs.length) * 100;
+        progress.style.width = `${percent}%`;
       }
-      updateProgress();
-      updatePreis();
-    }
-
-    function updatePreis() {
-      const preis = Module.calculatePrice(
-        state.suv,
-        state.handwash,
-        state.interior,
-        state.leather,
-        state.alcantara,
-        state.tireshine,
-        state.glassseal,
-        state.polish,
-        state.polish2,
-        state.polish3,
-        state.ceramic
-      );
-      const resultDiv = document.getElementById('result');
-      const submitBtn = document.getElementById('submitBtn');
-      if (preis === -1.0) {
-        resultDiv.textContent = "Bitte Handwäsche aktivieren, um diese Leistung zu buchen.";
-        submitBtn.style.display = 'none';
-      } else {
-        resultDiv.textContent = `Gesamtpreis: ${preis.toFixed(2)} €`;
-        submitBtn.style.display = 'inline-block';
+  
+      function nextFrage() {
+        current++;
+        if (current < frageDivs.length) {
+          fragenWrapper.style.transform = `translateX(-${current * 100}%)`;
+        }
+        updateProgress();
+        updatePreis();
       }
-    }
-
-    Module.onRuntimeInitialized = () => {
+  
+      function updatePreis() {
+        const preis = Module.calculatePrice(
+          state.suv,
+          state.handwash,
+          state.interior,
+          state.leather,
+          state.alcantara,
+          state.tireshine,
+          state.glassseal,
+          state.polish,
+          state.polish2,
+          state.polish3,
+          state.ceramic
+        );
+        const resultDiv = document.getElementById('result');
+        const submitBtn = document.getElementById('submitBtn');
+        if (preis === -1.0) {
+          resultDiv.textContent = "Bitte Handwäsche aktivieren, um diese Leistung zu buchen.";
+          submitBtn.style.display = 'none';
+        } else {
+          resultDiv.textContent = `Gesamtpreis: ${preis.toFixed(2)} €`;
+          submitBtn.style.display = 'inline-block';
+        }
+      }
+  
       const buttons = document.querySelectorAll('button[data-name]');
       buttons.forEach(button => {
         button.addEventListener('click', () => {
           const name = button.dataset.name;
           const value = button.dataset.value;
-
+  
           if (value !== undefined) {
             state[name] = (value === 'true');
-            // nur Ja/Nein Auswahl
             document.querySelectorAll(`[data-name="${name}"]`).forEach(b => b.classList.remove('active'));
             button.classList.add('active');
             nextFrage();
           } else {
-            // Extras togglen
             state[name] = !state[name];
             button.classList.toggle('active');
             updatePreis();
           }
         });
       });
+  
       updateProgress();
-    };
-
-    document.getElementById('pflegeForm').addEventListener('submit', e => {
-      e.preventDefault();
-      alert("Deine Anfrage wurde gespeichert. Wir melden uns bei dir!");
-    });
+  
+      document.getElementById('pflegeForm').addEventListener('submit', e => {
+        e.preventDefault();
+        alert("Deine Anfrage wurde gespeichert. Wir melden uns bei dir!");
+      });
+    }
   </script>
+
 </body>
 </html>
