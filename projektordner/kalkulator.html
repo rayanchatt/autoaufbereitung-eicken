@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fahrzeugpflege-Kalkulator</title>
+  <script src="calculator.js"></script> <!-- Emscripten-WASM-Script -->
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    .checkboxes label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+    #result {
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+    #submitBtn {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fahrzeugpflege-Kalkulator</h1>
+
+  <form id="pflegeForm">
+    <div class="checkboxes">
+      <label><input type="checkbox" name="suv"> SUV-Aufschlag</label>
+      <label><input type="checkbox" name="handwash"> Handwäsche</label>
+      <label><input type="checkbox" name="interior"> Innenreinigung</label>
+      <label><input type="checkbox" name="leather"> Lederpflege</label>
+      <label><input type="checkbox" name="alcantara"> Alcantara-Reinigung</label>
+      <label><input type="checkbox" name="tireshine"> Reifenglanz</label>
+      <label><input type="checkbox" name="glassseal"> Scheibenversiegelung</label>
+      <label><input type="checkbox" name="polish"> Hochglanzpolitur*</label>
+      <label><input type="checkbox" name="polish2"> Zweistufige Lackaufbereitung*</label>
+      <label><input type="checkbox" name="polish3"> Dreistufige Lackaufbereitung*</label>
+      <label><input type="checkbox" name="ceramic"> Keramik-Lackversiegelung</label>
+    </div>
+    <div id="result">Gesamtpreis: –</div>
+    <button type="submit" id="submitBtn">Anfrage senden</button>
+  </form>
+
+  <script>
+    Module.onRuntimeInitialized = () => {
+      const form = document.getElementById('pflegeForm');
+      const resultDiv = document.getElementById('result');
+      const submitBtn = document.getElementById('submitBtn');
+
+      function getChecked(name) {
+        return form.elements[name].checked;
+      }
+
+      form.addEventListener('change', () => {
+        const preis = Module.calculatePrice(
+          getChecked('suv'),
+          getChecked('handwash'),
+          getChecked('interior'),
+          getChecked('leather'),
+          getChecked('alcantara'),
+          getChecked('tireshine'),
+          getChecked('glassseal'),
+          getChecked('polish'),
+          getChecked('polish2'),
+          getChecked('polish3'),
+          getChecked('ceramic')
+        );
+
+        if (preis === -1.0) {
+          resultDiv.textContent = "Bitte Handwäsche aktivieren, um diese Leistung zu buchen.";
+          submitBtn.style.display = 'none';
+        } else {
+          resultDiv.textContent = `Gesamtpreis: ${preis.toFixed(2)} €`;
+          submitBtn.style.display = 'inline-block';
+        }
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert("Deine Anfrage wurde gespeichert. Wir melden uns bei dir!");
+      });
+    };
+  </script>
+</body>
+</html>
