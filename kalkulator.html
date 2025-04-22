@@ -1,0 +1,179 @@
+<!-- Abschnitt: Fahrzeugpflege-Kalkulator -->
+<section id="kalkulator" class="fade-in">
+  <h2>Fahrzeugpflege-Kalkulator</h2>
+  <div id="kalkulatorWrapper">
+    <div id="kalkulatorApp">
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progress"></div>
+      </div>
+
+      <form id="pflegeForm">
+        <div class="frage-container" id="fragenWrapper"></div>
+        <div id="result">Gesamtpreis: –</div>
+        <button type="submit" id="submitBtn">Anfrage senden</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Styling -->
+<style>
+  #kalkulatorApp {
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+    font-family: system-ui, sans-serif;
+  }
+
+  .progress-bar {
+    background: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    height: 12px;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: #3cb371;
+    width: 0%;
+    transition: width 0.4s ease-in-out;
+  }
+
+  .frage-container .frage {
+    margin-bottom: 2rem;
+  }
+
+  .frage h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .antworten button {
+    margin: 0.3rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background: #eee;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .antworten button.active {
+    background: #3cb371;
+    color: white;
+  }
+
+  #submitBtn {
+    padding: 0.6rem 1.2rem;
+    background: #222;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    display: none;
+    cursor: pointer;
+  }
+
+  #result {
+    font-weight: bold;
+    margin: 2rem 0;
+  }
+</style>
+
+<!-- Script -->
+<script>
+  const fragen = [
+    { text: "Fahrzeugtyp?", name: "suv", options: ["SUV", "Kein SUV"] },
+    { text: "Möchten Sie eine Handwäsche?", name: "handwash", options: ["Ja", "Nein"] },
+    { text: "Innenraumreinigung gewünscht?", name: "interior", options: ["Ja", "Nein"] },
+    { text: "Ledersitze vorhanden?", name: "leather", options: ["Ja", "Nein"] },
+    { text: "Alcantara vorhanden?", name: "alcantara", options: ["Ja", "Nein"] },
+    { text: "Reifenglanz gewünscht?", name: "tireshine", options: ["Ja", "Nein"] },
+    { text: "Scheibenversiegelung gewünscht?", name: "glassseal", options: ["Ja", "Nein"] },
+    { text: "Welche Politur?", name: "polish", options: ["Keine", "Hochglanz", "2-stufig", "3-stufig"] },
+    { text: "Keramikversiegelung gewünscht?", name: "ceramic", options: ["Ja", "Nein"] },
+  ];
+
+  const preise = {
+    grundgebuehr: 60,
+    handwash: 20,
+    interior: 30,
+    leather: 20,
+    alcantara: 20,
+    tireshine: 10,
+    glassseal: 15,
+    polish: {
+      "Keine": 0,
+      "Hochglanz": 40,
+      "2-stufig": 80,
+      "3-stufig": 120
+    },
+    ceramic: 250
+  };
+
+  const state = {};
+  let current = 0;
+
+  const fragenWrapper = document.getElementById('fragenWrapper');
+  const progress = document.getElementById('progress');
+  const resultDiv = document.getElementById('result');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function renderFrage() {
+    fragenWrapper.innerHTML = '';
+    const frage = fragen[current];
+    const frageDiv = document.createElement('div');
+    frageDiv.className = 'frage';
+    frageDiv.innerHTML = `<h2>${frage.text}</h2><div class="antworten"></div>`;
+
+    const antwortenDiv = frageDiv.querySelector('.antworten');
+    frage.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = opt;
+      btn.onclick = () => {
+        state[frage.name] = opt;
+        nextFrage();
+      };
+      antwortenDiv.appendChild(btn);
+    });
+
+    fragenWrapper.appendChild(frageDiv);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const percent = ((current + 1) / fragen.length) * 100;
+    progress.style.width = `${percent}%`;
+  }
+
+  function nextFrage() {
+    current++;
+    if (current < fragen.length) {
+      renderFrage();
+    } else {
+      kalkulierePreis();
+    }
+  }
+
+  function kalkulierePreis() {
+    let gesamt = preise.grundgebuehr;
+    if (state.handwash === "Ja") gesamt += preise.handwash;
+    if (state.interior === "Ja") gesamt += preise.interior;
+    if (state.leather === "Ja") gesamt += preise.leather;
+    if (state.alcantara === "Ja") gesamt += preise.alcantara;
+    if (state.tireshine === "Ja") gesamt += preise.tireshine;
+    if (state.glassseal === "Ja") gesamt += preise.glassseal;
+    if (state.polish) gesamt += preise.polish[state.polish];
+    if (state.ceramic === "Ja") gesamt += preise.ceramic;
+    resultDiv.textContent = `Gesamtpreis: ${gesamt.toFixed(2)} €`;
+    submitBtn.style.display = 'inline-block';
+  }
+
+  document.getElementById('pflegeForm').addEventListener('submit', e => {
+    e.preventDefault();
+    alert("Anfrage gespeichert! Wir melden uns bald bei Ihnen.");
+  });
+
+  renderFrage();
+</script>
