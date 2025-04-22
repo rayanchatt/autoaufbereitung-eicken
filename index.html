@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -7,6 +8,12 @@
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, sans-serif;
+    }
+
     iframe {
       width: 100%;
       max-width: 100%;
@@ -19,6 +26,12 @@
       iframe {
         height: 950px;
       }
+    }
+
+    footer {
+      padding: 1rem;
+      background: #f1f1f1;
+      text-align: center;
     }
   </style>
 </head>
@@ -37,7 +50,6 @@
         <h1>Autoaufbereitung‑Eicken</h1>
       </div>
       <nav class="nav-links">
-        <a href="#kalkulator">Kalkulator</a>
         <a href="#preise">Preise</a>
         <a href="#termin">Termin</a>
         <a href="datenschutz.html">Datenschutz</a>
@@ -49,11 +61,6 @@
   <section id="hero">
     <h2>Professionelle Fahrzeugaufbereitung in Mönchengladbach-Eicken</h2>
     <button onclick="window.location='#termin'">Jetzt Termin anfragen</button>
-  </section>
-
-  <section id="kalkulator" class="fade-in">
-    <h2>Fahrzeugpflege-Kalkulator</h2>
-    <iframe src="kalkulator.html" title="Fahrzeugpflege-Kalkulator"></iframe>
   </section>
 
   <section id="preise" class="fade-in">
@@ -88,39 +95,26 @@
 
   <section id="termin" class="fade-in">
     <h2>Termin buchen</h2>
-
     <form action="https://formspree.io/f/mzzelwpo" method="POST" class="kontakt-formular">
       <label>Name
         <input type="text" name="name" required>
       </label>
-
       <label>E-Mail
         <input type="email" name="email" required>
       </label>
-
       <label>Wunschdatum
         <input type="date" name="date" required>
       </label>
-
       <label>Nachricht
         <textarea name="message" rows="4"></textarea>
       </label>
-
-      <!-- Honeypot (zusätzlicher Spamschutz) -->
       <div style="display:none;">
         <input type="text" name="_gotcha">
       </div>
-
-      <!-- reCAPTCHA v2 -->
       <div class="g-recaptcha" data-sitekey="6LerOR0rAAAAALOv6VAmkgvnPvQJb7rvKFcCrhjv"></div>
-
-      <!-- Weiterleitung nach erfolgreichem Senden -->
       <input type="hidden" name="_next" value="https://rayanchatt.github.io/autoaufbereitung-eicken/danke.html">
-
       <button type="submit">Absenden</button>
     </form>
-
-    <!-- reCAPTCHA-Script einbinden -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </section>
 
