@@ -11,7 +11,6 @@
       padding: 2rem;
       max-width: 600px;
       margin: auto;
-      overflow-x: hidden;
     }
     .progress-bar {
       background: #e0e0e0;
@@ -89,21 +88,21 @@
         </div>
       </div>
       <div class="frage">
-        <h2>Möchten Sie eine Handwäsche?</h2>
+        <h2>Handwäsche gewünscht?</h2>
         <div class="antworten">
           <button type="button" data-name="handwash" data-value="true">Ja</button>
           <button type="button" data-name="handwash" data-value="false">Nein</button>
         </div>
       </div>
       <div class="frage">
-        <h2>Innenraumreinigung gewünscht?</h2>
+        <h2>Innenreinigung?</h2>
         <div class="antworten">
           <button type="button" data-name="interior" data-value="true">Ja</button>
           <button type="button" data-name="interior" data-value="false">Nein</button>
         </div>
       </div>
       <div class="frage">
-        <h2>Extras dazubuchen?</h2>
+        <h2>Extras?</h2>
         <div class="antworten">
           <button type="button" data-name="leather" data-toggle>Ledersitze</button>
           <button type="button" data-name="alcantara" data-toggle>Alcantara</button>
@@ -125,7 +124,10 @@
     let Module;
     createModule().then(instance => {
       Module = instance;
+      startApp();
+    });
 
+    function startApp() {
       const state = {
         suv: false,
         handwash: false,
@@ -160,7 +162,7 @@
       }
 
       function updatePreis() {
-        const preis = Module.calculatePrice(
+        const preis = Module._calculatePrice(
           state.suv,
           state.handwash,
           state.interior,
@@ -204,12 +206,11 @@
       });
 
       updateProgress();
-
       document.getElementById('pflegeForm').addEventListener('submit', e => {
         e.preventDefault();
         alert("Deine Anfrage wurde gespeichert. Wir melden uns bei dir!");
       });
-    });
+    }
   </script>
 </body>
 </html>
