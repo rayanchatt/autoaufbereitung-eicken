@@ -122,13 +122,10 @@
   </form>
 
   <script>
-    let Module; // Global verfügbar machen
-    createModule().then((instance) => {
+    let Module;
+    createModule().then(instance => {
       Module = instance;
-      startApp();
-    });
-  
-    function startApp() {
+
       const state = {
         suv: false,
         handwash: false,
@@ -142,17 +139,17 @@
         polish3: false,
         ceramic: false,
       };
-  
+
       let current = 0;
       const fragenWrapper = document.getElementById('fragenWrapper');
       const frageDivs = document.querySelectorAll('.frage');
       const progress = document.getElementById('progress');
-  
+
       function updateProgress() {
         const percent = ((current + 1) / frageDivs.length) * 100;
         progress.style.width = `${percent}%`;
       }
-  
+
       function nextFrage() {
         current++;
         if (current < frageDivs.length) {
@@ -161,7 +158,7 @@
         updateProgress();
         updatePreis();
       }
-  
+
       function updatePreis() {
         const preis = Module.calculatePrice(
           state.suv,
@@ -186,13 +183,13 @@
           submitBtn.style.display = 'inline-block';
         }
       }
-  
+
       const buttons = document.querySelectorAll('button[data-name]');
       buttons.forEach(button => {
         button.addEventListener('click', () => {
           const name = button.dataset.name;
           const value = button.dataset.value;
-  
+
           if (value !== undefined) {
             state[name] = (value === 'true');
             document.querySelectorAll(`[data-name="${name}"]`).forEach(b => b.classList.remove('active'));
@@ -205,15 +202,14 @@
           }
         });
       });
-  
+
       updateProgress();
-  
+
       document.getElementById('pflegeForm').addEventListener('submit', e => {
         e.preventDefault();
         alert("Deine Anfrage wurde gespeichert. Wir melden uns bei dir!");
       });
-    }
+    });
   </script>
-
 </body>
 </html>
