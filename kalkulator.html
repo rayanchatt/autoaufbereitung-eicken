@@ -13,10 +13,23 @@
       margin: auto;
       overflow-x: hidden;
     }
+    .progress-bar {
+      background: #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      height: 12px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: #3cb371;
+      width: 0%;
+      transition: width 0.4s ease-in-out;
+    }
     .frage-container {
       display: flex;
       transition: transform 0.4s ease-in-out;
-      width: 100%;
+      width: calc(100% * 4);
     }
     .frage {
       min-width: 100%;
@@ -61,6 +74,10 @@
 </head>
 <body>
   <h1>Fahrzeugpflege-Kalkulator</h1>
+
+  <div class="progress-bar">
+    <div class="progress-bar-fill" id="progress"></div>
+  </div>
 
   <form id="pflegeForm">
     <div class="frage-container" id="fragenWrapper">
@@ -122,12 +139,19 @@
     let current = 0;
     const fragenWrapper = document.getElementById('fragenWrapper');
     const frageDivs = document.querySelectorAll('.frage');
+    const progress = document.getElementById('progress');
+
+    function updateProgress() {
+      const percent = ((current + 1) / frageDivs.length) * 100;
+      progress.style.width = `${percent}%`;
+    }
 
     function nextFrage() {
       current++;
       if (current < frageDivs.length) {
         fragenWrapper.style.transform = `translateX(-${current * 100}%)`;
       }
+      updateProgress();
       updatePreis();
     }
 
@@ -177,6 +201,7 @@
           }
         });
       });
+      updateProgress();
     };
 
     document.getElementById('pflegeForm').addEventListener('submit', e => {
